@@ -16,7 +16,8 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.RobotModeTriggers;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine.Direction;
-
+import frc.robot.Managers.SwerveDriveManager;
+import frc.robot.Managers.VisionManager;
 import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
 
@@ -36,9 +37,15 @@ public class RobotContainer {
     private final CommandXboxController joystick = new CommandXboxController(0);
 
     public final CommandSwerveDrivetrain drivetrain = TunerConstants.createDrivetrain();
+    public final SwerveDriveManager swerve = new SwerveDriveManager(drivetrain, joystick);
+    public final VisionManager vision = new VisionManager(swerve);
+    
 
     public RobotContainer() {
         configureBindings();
+    }
+    public void update(){
+        swerve.update();
     }
 
     private void configureBindings() {
@@ -97,4 +104,4 @@ public class RobotContainer {
         );
     }
 }
- cc
+ 

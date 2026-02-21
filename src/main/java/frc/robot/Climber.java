@@ -15,26 +15,33 @@ import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.FunctionalCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import static frc.robot.Constants.CoralConstants.*;
+
 import edu.wpi.first.wpilibj2.command.Command;
 
-public class Climber extends subsystemBase{
+public class Climber extends SubsystemBase{
     private double climbarm = 0.0;
+    private int climbarm_ID = 21;
+
    
     private final SparkMax climbarmmoter = new SparkMax(climbarm_ID, MotorType.kBrushless);
 
     private final SparkMaxConfig climbarmconfig = new SparkMaxConfig();
 
-    private final SparkClosedLoopController climbarmcontroller = climbarmmoter.getClosedloopController();
+    private final SparkClosedLoopController climbarmcontroller = climbarmmoter.getClosedLoopController();
 
-    public Climbersubsystem(){
+    public Climber(){
         climbarmconfig
         .smartCurrentLimit(40)
-        .IdleMode(IdleMode.kBrake)
+        .idleMode(IdleMode.kBrake)
         .closedLoop
         .pid(1,0,0)
         ;
-        climbarmmoter.configure(climbarmconfig, ResetMode.kRestSafeParameters, PersistMode.KPersistParmeters);
+        climbarmmoter.configure(climbarmconfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+    }
+    @Override
+    public void periodic(){ 
+        climbarmmoter.set(climbarm);
+
     }
     
 }
