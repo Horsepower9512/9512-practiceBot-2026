@@ -66,6 +66,9 @@ public class Intake extends SubsystemBase {
         intakePosition = 0;
         intakeSpeed = 0;
     }
+    public void stopRollers(){
+        intakeSpeed = 0;
+    }
 
 
     @Override

@@ -28,6 +28,12 @@ public class Launcher extends SubsystemBase {
     public void setShooterSpeed(double _speed){
         shootingSpeeds = _speed;
     }
+    public void shoot(){
+        shootingSpeeds = kConstantShootingSpeed;
+    }
+    public void stop(){
+        shootingSpeeds = 0;
+    }
 
 
     @Override

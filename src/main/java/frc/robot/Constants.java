@@ -21,5 +21,12 @@ public class Constants {
 
     public static class LauncherConstants{
         public static int kShooterID = 0;
+        public static double kConstantShootingSpeed = 12;
+    }
+
+    public static class ClimbConstants{
+        public static int kClimbID = 0;
+        public static double kClimbSpeed;
+        public static double kFallSpeed;
     }
 }   

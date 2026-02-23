@@ -16,9 +16,48 @@ public class Robot extends SubsystemBase{
     public Command intake(){
         return Commands.startEnd(() -> {
             intake.startIntaking();
-            indexer.
+            indexer.index();
         }, () -> {
-
+            intake.stopRollers();
+            indexer.stopTank();
         }, indexer, intake);
     }
+
+    public Command shoot(){
+        return Commands.startEnd(() -> {
+            intake.Stow();
+            indexer.index();
+            indexer.kick();
+            launcher.shoot();
+        }, () -> {
+            indexer.stopKicker();
+            launcher.stop();
+        }, intake, launcher, indexer);
+    }
+
+    public Command climb(){
+        return Commands.startEnd(() -> {
+            indexer.stopKicker();
+            indexer.stopTank();
+            launcher.stop();
+            intake.Stow();
+            climber.goUp();
+        }, () -> {
+            climber.stop();
+        }, climber, intake, launcher, indexer);
+    }
+
+        public Command descend(){
+        return Commands.startEnd(() -> {
+            indexer.stopKicker();
+            indexer.stopTank();
+            launcher.stop();
+            intake.Stow();
+            climber.goDown();
+        }, () -> {
+            climber.stop();
+        }, climber, intake, launcher, indexer);
+    }
+
+    
 }   
